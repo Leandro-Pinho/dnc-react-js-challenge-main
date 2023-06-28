@@ -3,6 +3,7 @@
 header {
     display: flex;
     justify-content: flex-start;
+    width: 100%;
     height: 75px;
     padding: 0 60px;
     background-color: $bg-header;
@@ -15,7 +16,7 @@ header {
 
         li {
             display: inline;
-            color: #FFF;
+            color: $color-white;
             font-size: 25px;
             font-family: Poppins;
             font-weight: 600;
@@ -28,7 +29,7 @@ header {
             justify-content: center;
             align-items: flex-end;
             background-color: $color-white;
-            color: #0C70F2;
+            color: $bg-header;
             font-size: 25px;
             font-family: Poppins;
             font-weight: 600;
