@@ -1,0 +1,43 @@
+@use "../../styles/variable" as *;
+
+header {
+    display: flex;
+    justify-content: flex-start;
+    height: 75px;
+    padding: 0 60px;
+    background-color: $bg-header;
+
+    ul {
+        display: flex;
+        align-items: flex-end;
+        gap: 35px;
+        list-style: none;
+
+        li {
+            display: inline;
+            color: #FFF;
+            font-size: 25px;
+            font-family: Poppins;
+            font-weight: 600;
+            padding-bottom: 5px;
+
+        }
+
+        .tarefa {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            background-color: $color-white;
+            color: #0C70F2;
+            font-size: 25px;
+            font-family: Poppins;
+            font-weight: 600;
+            width: 174px;
+            height: 54px;
+            border: none;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+        }
+
+    }
+}
