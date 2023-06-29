@@ -1,29 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./components/Header/Header";
 import complete from "../src/assets/mdi_checkbox-blank-outline.svg"
 import edit from "../src/assets/material-symbols_edit.svg"
 import delet from "../src/assets/ic_round-delete.svg"
-import adding from "../src/assets/ic_round-delete.svg"
+import ModalAlert from "./components/ModalAlert/ModalAlert";
+import ModalForm from "./components/ModalForm/ModalForm";
 import "./app.scss"
 
 
-//utilizar esse mockup como exemplo
-
-const db = [
-  { "id": 1, "title": "Exercicios", "description": "Ir para academia fazer exercicios", "completed": true },
-  { "id": 2, "title": "Limpar o carro", "description": "Limpar o carro inteiro, de dentro pra fora", "completed": false },
-  { "id": 3, "title": "Banho e tosa", "description": "Levar o cachorro ao pet shop", "completed": false },
-  { "id": 4, "title": "Limpar quarto", "description": "Limpar toda bagunça que está dentro do quarto", "completed": true },
-  { "id": 5, "title": "trabalhar", "description": "Chegar ao escritorio antes das 20:00", "completed": true },
- /* { "id": 6, "title": "Ir ao banco", "description": "Chear ao banco antes das 10:00", "completed": false },
-  { "id": 7, "title": "Almoçar", "description": "Preparar a comida para a janta", "completed": false },
-  { "id": 8, "title": "Jogar volei", "description": "Ir a quadra para jogar volei com os amigos", "completed": true },
-  { "id": 9, "title": "Estudar programação", "description": "Entrar na plataforma dos alunos para estudar", "completed": false },
-  { "id": 10, "title": "shopping", "description": "Fazer algumas compras no shopping", "completed": true } */
-]
-
-console.log(db)
 function App() {
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [modalIsOpen1, setModalIsOpen1] = useState(false)
+  const [modalFormIsOpen, setModalFormIsOpen] = useState(false)
+
+  const [todos, setTodos] = useState([]);
+  const [todo, setTodo] = useState('');
+
+  // =========== adicionando tarefa ============= 
+  function handleInputChange(e) {
+    setTodo(e.target.value);
+  }
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+
+    if (todo !== "") {
+      setTodos([
+        ...todos,
+        {
+          id: todos.length + 1,
+          text: todo.trim()
+        }
+      ]);
+    }
+
+    setTodo("");
+  }
+
+  /* ====================== delete ====================== */
+  function handleDeleteClick(id) {
+    setTodos(todos.filter((todo) => todo.id !== id))
+  }
+
+
+  /* =================== atualizar ================== */
+
+  
   return (
     <div className="App" >
       <Header />
@@ -37,19 +59,24 @@ function App() {
           </tr>
         </thead>
 
-        {db.map((task) => (
+        <ModalForm isOpen={modalFormIsOpen} handleFormSubmit={handleFormSubmit} handleInputChange={handleInputChange} setModalFormIsOpen={() => setModalFormIsOpen(!modalFormIsOpen)} todo={todo} />
+        {todos.map((task) => (
           <tbody key={task.id}>
+            <ModalAlert isOpen={modalIsOpen} setModalIsOpen={() => setModalIsOpen(!modalIsOpen)} operation={"Deseja Excluir esta tarefa?"} deleteTask={() => handleDeleteClick(task.id)} title={task.text} />
+            <ModalAlert isOpen={modalIsOpen1} setModalIsOpen={() => setModalIsOpen1(!modalIsOpen1)} operation={"Deseja Editar esta tarefa?"} title={task.text} />
             <tr>
-              <td>{task.title}</td>
+              <td>{task.text}</td>
               <td className="img-complete">{<img src={complete}></img>}</td>
-              <td>{<img src={edit}></img>}{<img src={delet}></img>}</td>
+              <td>{<img src={edit} onClick={() => setModalIsOpen1(true)}></img>}{<img src={delet} onClick={() => setModalIsOpen(true)}></img>}</td>
             </tr>
           </tbody>
         ))}
-            <tr>
-              <td className="new-task">Nova tarefa...</td>
-              <td><button>+</button></td>
-            </tr>
+        <tfoot>
+          <tr>
+            <td className="new-task">Nova tarefa...</td>
+            <td><button onClick={() => setModalFormIsOpen(true)}>+</button></td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   );
