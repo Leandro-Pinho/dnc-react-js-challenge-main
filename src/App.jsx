@@ -23,15 +23,30 @@ function App() {
         ...todos,
         {
           id: todos.length + 1,
-          text: todo.trim()
+          text: todo.trim(),
+          completed: false,
         }
       ]);
     }
-
+console.log(todos)
     setTodo("");
   }
 
-  
+  function handleDeleteClick(id) {
+    setTodos(todos.filter((todo) => todo.id !== id))
+  }
+
+  const completeTask = (id) => {
+    setTodos(
+      todos.map((task) => {
+        if (task.id === id && task.completed === false) {
+          return { ...task, completed: true };
+        } else {
+          return { ...task, completed: false };
+        }
+      })
+    )
+  }
 
   return (
     <section className="App" >
@@ -50,8 +65,8 @@ function App() {
           <tbody key={task.id}>
             <tr>
               <td>{task.text}</td>
-              <td className="img-complete">{<img src={complete}></img>}</td>
-              <td>{<img src={edit}></img>}{<img src={delet}></img>}</td>
+              <td className="img-complete">{<input type="checkbox" onClick={() => completeTask(task.id)}></input>}</td>
+              <td>{<img src={edit}></img>}{<img src={delet} onClick={() => handleDeleteClick(task.id)}></img>}</td>
             </tr>
           </tbody>
         ))}

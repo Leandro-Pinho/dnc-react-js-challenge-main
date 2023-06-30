@@ -71,10 +71,20 @@
         }
 
         .new-task {
-            color: #FFF;
-            font-size: 25px;
-            font-family: Raleway;
-            font-style: italic;
+            
+            input {
+                border: none;
+                background-color: transparent;
+                outline: none;
+                color: #FFF;
+                font-size: 25px;
+                font-family: Raleway;
+                font-style: italic;
+            }
+            
+            input:focus {
+                border-bottom: 1px solid white;
+            }
         }
 
     }
