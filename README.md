@@ -18,7 +18,7 @@
 
 Aplicação desenvolvida para listar e visualizar tarefas, com o objetivo de colocar em práticas a biblioteca de desenvolvimento de interfaces React JS.
 
-![](./public/Portifolio.gif)
+![](public/Portifolio.gif)
 
 <hr>
 
