@@ -4,10 +4,10 @@
 	<br>
 	<p align="center">
 		<a href="https://www.linkedin.com/in/leandro-pinho-4b5420126/">
-		  <img alt="made by" src="https://img.shields.io/badge/made%20by-Felipe%20Borges-orange">
+		  <img alt="made by" src="https://img.shields.io/badge/made%20by-Leandro%20Pinho-orange">
 		</a>
 		<a href="https://github.com/Leandro-Pinho/dnc-react-js-challenge-main">
-		  <img alt="last commit" src="https://img.shields.io/github/last-commit/felipejsborges/felipejsborges">
+		  <img alt="last commit" src="https://img.shields.io/github/last-commit/Leandro-Pinho/Leandro-Pinho">
 		</a>
 	</p>
 </div>
@@ -18,7 +18,8 @@
 
 Aplicação desenvolvida para listar e visualizar tarefas, com o objetivo de colocar em práticas a biblioteca de desenvolvimento de interfaces React JS.
 
-<video src="./public/todo list.gif">
+![](./public/Portifolio.gif)
+
 <hr>
 
 <h4>Tecnologias 🚀</h4>
