@@ -2,7 +2,7 @@ import React from 'react'
 import "./index.scss"
 
 
-const ModalAlert = ({ isOpen, setModalIsOpen, operation, deleteTask, title }) => {
+const ModalAlert = ({ isOpen, operation, title, setOpenModal, onClickYes }) => {
     if (isOpen) {
         return (
             <div className='background'>
@@ -11,9 +11,8 @@ const ModalAlert = ({ isOpen, setModalIsOpen, operation, deleteTask, title }) =>
                     <p>{title}</p>
 
                     <div className='btn-modal'>
-                        <button className='btn_not' onClick={setModalIsOpen}>Não</button>
-                        <button className='btn_yes' onClick={deleteTask}>Sim</button>
-                    
+                        <button className='btn_not' onClick={() => setOpenModal(false)}>Não</button>
+                        <button className='btn_yes' onClick={onClickYes}>Sim</button>
                     </div>
                 </div>
             </div>
