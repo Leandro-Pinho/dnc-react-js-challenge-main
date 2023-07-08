@@ -1,11 +1,12 @@
 <div align="center">
 	<h1>Listagem de tarefas</h1>
+	<img src="./public/home-preview.png">
 	<br>
 	<p align="center">
-		<a href="https://www.linkedin.com/in/felipejsborges/">
+		<a href="https://www.linkedin.com/in/leandro-pinho-4b5420126/">
 		  <img alt="made by" src="https://img.shields.io/badge/made%20by-Felipe%20Borges-orange">
 		</a>
-		<a href="https://github.com/felipejsborges/pokemon-challenge/commits/master">
+		<a href="https://github.com/Leandro-Pinho/dnc-react-js-challenge-main">
 		  <img alt="last commit" src="https://img.shields.io/github/last-commit/felipejsborges/felipejsborges">
 		</a>
 	</p>
@@ -17,6 +18,7 @@
 
 Aplicação desenvolvida para listar e visualizar tarefas, com o objetivo de colocar em práticas a biblioteca de desenvolvimento de interfaces React JS.
 
+<video src="./public/todo list.gif">
 <hr>
 
 <h4>Tecnologias 🚀</h4>
@@ -54,6 +56,7 @@ $ npm run dev
 
 <hr>
 
+<!--
 by Felipe Borges<br>
 <div>
 	<a href="https://www.linkedin.com/in/felipejsborges">
@@ -65,4 +68,4 @@ by Felipe Borges<br>
 	<a href="mailto:felipejsborges@outlook.com">
 		<img width="32px" src="https://github.com/felipejsborges/felipejsborges/blob/master/assets/mail.svg" alt="E-mail">
 	</a>
-</div>
+</div> -->
