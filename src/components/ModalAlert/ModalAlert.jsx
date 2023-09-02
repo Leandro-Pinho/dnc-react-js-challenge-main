@@ -7,8 +7,8 @@ const ModalAlert = ({ isOpen, operation, title, setOpenModal, onClickYes }) => {
         return (
             <div className='background'>
                 <div className='modal'>
-                    <h1>{operation}</h1>
-                    <p>{title}</p>
+                    <h1>{operation.text}</h1>
+                    <p>{title.text}</p>
 
                     <div className='btn-modal'>
                         <button className='btn_not' onClick={() => setOpenModal(false)}>Não</button>

@@ -32,7 +32,7 @@ function App() {
           }
         ]);
       }
-    //  console.log(todos)
+      //  console.log(todos)
       setTodo("");
     } else {
       updateTodo(todo, editTodo.id, editTodo.completed)
@@ -45,7 +45,7 @@ function App() {
     )
     setTodos(newTodo);
     setEditTodo("");
-   // console.log(newTodo)
+    // console.log(newTodo)
   }
 
   useEffect(() => {
@@ -92,16 +92,17 @@ function App() {
           </tr>
         </thead>
 
+        <ModalAlert isOpen={openModalEdit} operation={"Deseja editar esta tarefa?"} title={todos} setOpenModal={setOpenModalEdit} onClickYes={() => handleEdit(task.id)} />
+        <ModalAlert isOpen={openModalDelete} operation={"Deseja excluir esta tarefa?"} title={todos} setOpenModal={setOpenModalDelete} onClickYes={() => handleDeleteClick(task.id)} />
+       
         {todos.map((task) => (
           <tbody key={task.id}>
-            <ModalAlert  isOpen={openModalDelete} operation={"Deseja excluir esta tarefa?"} title={task.text} setOpenModal={setOpenModalDelete} onClickYes={() => handleDeleteClick(task.id)}/>
-            <ModalAlert  isOpen={openModalEdit} operation={"Deseja editar esta tarefa?"} title={task.text} setOpenModal={setOpenModalEdit} onClickYes={() => handleEdit(task.id)}/>  
             <tr>
               <td className={`list ${task.completed ? "complete" : ""}`}>{task.text}</td>
               <td className="img-complete">{<input type="checkbox" onClick={() => completeTask(task.id)}></input>}</td>
               <td>
-                {<img src={edit} onClick={()=> setOpenModalEdit(true)} /*onClick={() => handleEdit(task.id)}*/></img>}
-                {<img src={delet} onClick={()=> setOpenModalDelete(true)} /*onClick={() => handleDeleteClick(task.id)}*/></img>}
+                {<img src={edit} onClick={() => setOpenModalEdit(true)} /*onClick={() => handleEdit(task.id)}*/></img>}
+                {<img src={delet} onClick={() => setOpenModalDelete(true)} /*onClick={() => handleDeleteClick(task.id)}*/></img>}
               </td>
             </tr>
           </tbody>
