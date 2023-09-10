@@ -9,9 +9,10 @@ import "./app.scss"
 function App() {
   const [todos, setTodos] = useState([]);
   const [todo, setTodo] = useState('');
+  const [takeId, setTakeId] = useState('');
   const [editTodo, setEditTodo] = useState(null);
 
-  const [openModalDelete, setOpenModalDelete] = useState(false)
+  const [openModalDelete, setOpenModalDelete] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false)
 
 
@@ -26,7 +27,7 @@ function App() {
         setTodos([
           ...todos,
           {
-            id: todos.length + 1,
+            id: new Date(),
             text: todo.trim(),
             completed: false,
           }
@@ -55,10 +56,15 @@ function App() {
       setTodo("")
     }
   }, [setTodo, editTodo])
+  
+  const handleOpenModalDelete = (id) => {
+    setTakeId(id);
+    setOpenModalDelete(true);
+  }
 
-  function handleDeleteClick(id) {
-    setTodos(todos.filter((todo) => todo.id !== id))
-    setOpenModalDelete(false)
+  function handleDeleteClick() {
+    setTodos(todos.filter((todo) => todo.id !== takeId))
+    setOpenModalDelete(false);
   }
 
   const completeTask = (id) => {
@@ -73,12 +79,20 @@ function App() {
     )
   }
 
-  const handleEdit = (id) => {
-    const findTodo = todos.find((todo) => todo.id === id);
-    setEditTodo(findTodo);
-    setOpenModalEdit(false)
+  const handleOpenModalEdit = (id) => {
+    setTakeId(id);
+    setOpenModalEdit(true);
   }
 
+  const handleEdit = () => {
+    const findTodo = todos.find((todo) => todo.id === takeId);
+    setEditTodo(findTodo);
+    setOpenModalEdit(false);
+  }
+
+  
+
+  console.log(takeId)
   return (
     <section className="App" >
       <Header />
@@ -92,20 +106,39 @@ function App() {
           </tr>
         </thead>
 
-        <ModalAlert isOpen={openModalEdit} operation={"Deseja editar esta tarefa?"} title={todos} setOpenModal={setOpenModalEdit} onClickYes={() => handleEdit(task.id)} />
-        <ModalAlert isOpen={openModalDelete} operation={"Deseja excluir esta tarefa?"} title={todos} setOpenModal={setOpenModalDelete} onClickYes={() => handleDeleteClick(task.id)} />
-       
+
+        <ModalAlert
+          isOpen={openModalEdit}
+          setOpenModal={setOpenModalEdit}
+
+          operation={"Deseja editar esta tarefa?"}
+          // title={task.text}
+          onClickYes={handleEdit}
+        />
         {todos.map((task) => (
-          <tbody key={task.id}>
-            <tr>
-              <td className={`list ${task.completed ? "complete" : ""}`}>{task.text}</td>
-              <td className="img-complete">{<input type="checkbox" onClick={() => completeTask(task.id)}></input>}</td>
-              <td>
-                {<img src={edit} onClick={() => setOpenModalEdit(true)} /*onClick={() => handleEdit(task.id)}*/></img>}
-                {<img src={delet} onClick={() => setOpenModalDelete(true)} /*onClick={() => handleDeleteClick(task.id)}*/></img>}
-              </td>
-            </tr>
-          </tbody>
+          <>
+
+
+            <ModalAlert
+              isOpen={openModalDelete}
+              setOpenModal={setOpenModalDelete}
+
+              operation={"Deseja excluir esta tarefa?"}
+              // title={task.text}
+              onClickYes={handleDeleteClick}
+            />
+
+            <tbody key={task.id}>
+              <tr>
+                <td className={`list ${task.completed ? "complete" : ""}`}>{task.text}</td>
+                <td className="img-complete">{<input type="checkbox" onClick={() => completeTask(task.id)}></input>}</td>
+                <td>
+                  {<img src={edit} onClick={() => handleOpenModalEdit(task.id)}></img>}
+                  {<img src={delet} onClick={() => handleOpenModalDelete(task.id)}></img>}
+                </td>
+              </tr>
+            </tbody>
+          </>
         ))}
 
       </table>
