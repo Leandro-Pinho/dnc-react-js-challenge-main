@@ -4,6 +4,7 @@ import edit from "./assets/material-symbols_edit.svg"
 import delet from "./assets/ic_round-delete.svg"
 import ModalAlert from "./components/ModalAlert/ModalAlert";
 import "./app.scss"
+import Filter from "./components/Filter/Filter";
 
 
 function App() {
@@ -15,6 +16,10 @@ function App() {
   const [openModalDelete, setOpenModalDelete] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false)
 
+  // filtrar
+  const [filter, setFilter] = useState("All");
+  // ordernar
+  const [sort, setSort] = useState("Asc");
 
   function handleInputChange(e) {
     setTodo(e.target.value);
@@ -56,7 +61,7 @@ function App() {
       setTodo("")
     }
   }, [setTodo, editTodo])
-  
+
   const handleOpenModalDelete = (id) => {
     setTakeId(id);
     setOpenModalDelete(true);
@@ -90,13 +95,13 @@ function App() {
     setOpenModalEdit(false);
   }
 
-  
-
-  console.log(takeId)
   return (
     <section className="App" >
       <Header />
       <h1>Otimize seu tempo e se organize com o nosso Planejador Diário.</h1>
+
+      <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
+
       <table>
         <thead >
           <tr className="title-header">
@@ -115,31 +120,47 @@ function App() {
           // title={task.text}
           onClickYes={handleEdit}
         />
-        {todos.map((task) => (
-          <>
 
+        <ModalAlert
+          isOpen={openModalDelete}
+          setOpenModal={setOpenModalDelete}
 
-            <ModalAlert
-              isOpen={openModalDelete}
-              setOpenModal={setOpenModalDelete}
+          operation={"Deseja excluir esta tarefa?"}
+          // title={task.text}
+          onClickYes={handleDeleteClick}
+        />
 
-              operation={"Deseja excluir esta tarefa?"}
-              // title={task.text}
-              onClickYes={handleDeleteClick}
-            />
+        {todos
+          // filtro por todas e completas e incpmpletas
+          .filter((todo) => (
+            filter === "All"
+              ? true
+              : filter === "Completed"
+                ? todo.completed
+                : !todo.completed
+          ))
 
-            <tbody key={task.id}>
-              <tr>
-                <td className={`list ${task.completed ? "complete" : ""}`}>{task.text}</td>
-                <td className="img-complete">{<input type="checkbox" onClick={() => completeTask(task.id)}></input>}</td>
-                <td>
-                  {<img src={edit} onClick={() => handleOpenModalEdit(task.id)}></img>}
-                  {<img src={delet} onClick={() => handleOpenModalDelete(task.id)}></img>}
-                </td>
-              </tr>
-            </tbody>
-          </>
-        ))}
+          // ordernar por ascendente ou decendente na ordem alfabetica
+          .sort((a, b) =>
+            sort === "Asc"
+              ? a.text.localeCompare(b.text)
+              : b.text.localeCompare(a.text)
+          )
+
+          .map((task) => (
+            <>
+              <tbody key={task.id}>
+                <tr>
+                  <td className={`list ${task.completed ? "complete" : ""}`}>{task.text}</td>
+                  <td className="img-complete">{<input type="checkbox" onClick={() => completeTask(task.id)}></input>}</td>
+                  <td>
+                    {<img src={edit} onClick={() => handleOpenModalEdit(task.id)}></img>}
+                    {<img src={delet} onClick={() => handleOpenModalDelete(task.id)}></img>}
+                  </td>
+                </tr>
+              </tbody>
+            </>
+          ))}
 
       </table>
 
