@@ -8,13 +8,18 @@ import Filter from "./components/Filter/Filter";
 
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const initialState = JSON.parse(localStorage.getItem("todos")) || [];
+  const [todos, setTodos] = useState(initialState);
   const [todo, setTodo] = useState('');
   const [takeId, setTakeId] = useState('');
   const [editTodo, setEditTodo] = useState(null);
 
   const [openModalDelete, setOpenModalDelete] = useState(false);
-  const [openModalEdit, setOpenModalEdit] = useState(false)
+  const [openModalEdit, setOpenModalEdit] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos])
 
   // filtrar
   const [filter, setFilter] = useState("All");
@@ -37,12 +42,14 @@ function App() {
             completed: false,
           }
         ]);
+      
       }
       //  console.log(todos)
       setTodo("");
     } else {
       updateTodo(todo, editTodo.id, editTodo.completed)
     }
+
   }
 
   const updateTodo = (text, id, completed) => {
