@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
-import edit from "./assets/material-symbols_edit.svg"
-import delet from "./assets/ic_round-delete.svg"
 import ModalAlert from "./components/ModalAlert/ModalAlert";
-import "./app.scss"
 import Filter from "./components/Filter/Filter";
+import TaskList from "./components/TaskList/TaskList";
+import Search from "./components/Search/Search";
+import "./app.scss"
 
 
 function App() {
@@ -21,6 +21,8 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos])
 
+  // state de pesquisa
+  const [search, setSearch] = useState("");
   // filtrar
   const [filter, setFilter] = useState("All");
   // ordernar
@@ -42,7 +44,7 @@ function App() {
             completed: false,
           }
         ]);
-      
+
       }
       //  console.log(todos)
       setTodo("");
@@ -108,68 +110,36 @@ function App() {
       <h1>Otimize seu tempo e se organize com o nosso Planejador Diário.</h1>
 
       <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
+      <Search search={search} setSearch={setSearch} />
 
-      <table>
-        <thead >
-          <tr className="title-header">
-            <th>Tarefa { /* todos.length */}</th>
-            <th>Status</th>
-            <th>Opções</th>
-          </tr>
-        </thead>
+      <ModalAlert
+        isOpen={openModalEdit}
+        setOpenModal={setOpenModalEdit}
 
+        operation={"Deseja editar esta tarefa?"}
+        // title={task.text}
+        onClickYes={handleEdit}
+      />
 
-        <ModalAlert
-          isOpen={openModalEdit}
-          setOpenModal={setOpenModalEdit}
+      <ModalAlert
+        isOpen={openModalDelete}
+        setOpenModal={setOpenModalDelete}
 
-          operation={"Deseja editar esta tarefa?"}
-          // title={task.text}
-          onClickYes={handleEdit}
-        />
+        operation={"Deseja excluir esta tarefa?"}
+        // title={task.text}
+        onClickYes={handleDeleteClick}
+      />
 
-        <ModalAlert
-          isOpen={openModalDelete}
-          setOpenModal={setOpenModalDelete}
-
-          operation={"Deseja excluir esta tarefa?"}
-          // title={task.text}
-          onClickYes={handleDeleteClick}
-        />
-
-        {todos
-          // filtro por todas e completas e incpmpletas
-          .filter((todo) => (
-            filter === "All"
-              ? true
-              : filter === "Completed"
-                ? todo.completed
-                : !todo.completed
-          ))
-
-          // ordernar por ascendente ou decendente na ordem alfabetica
-          .sort((a, b) =>
-            sort === "Asc"
-              ? a.text.localeCompare(b.text)
-              : b.text.localeCompare(a.text)
-          )
-
-          .map((task) => (
-            <>
-              <tbody key={task.id}>
-                <tr>
-                  <td className={`list ${task.completed ? "complete" : ""}`}>{task.text}</td>
-                  <td className="img-complete">{<input type="checkbox" onClick={() => completeTask(task.id)}></input>}</td>
-                  <td>
-                    {<img src={edit} onClick={() => handleOpenModalEdit(task.id)}></img>}
-                    {<img src={delet} onClick={() => handleOpenModalDelete(task.id)}></img>}
-                  </td>
-                </tr>
-              </tbody>
-            </>
-          ))}
-
-      </table>
+      <TaskList
+        key={todo.id}
+        todos={todos}
+        filter={filter}
+        sort={sort}
+        search={search}
+        handleOpenModalDelete={handleOpenModalDelete}
+        handleOpenModalEdit={handleOpenModalEdit}
+        completeTask={completeTask}
+      />
 
       <form onSubmit={handleFormSubmit}>
         <input type="text" name="todo" placeholder="Nova Tarefa..." value={todo} onChange={handleInputChange} />
