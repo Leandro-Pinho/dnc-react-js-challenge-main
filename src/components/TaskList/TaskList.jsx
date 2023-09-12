@@ -6,7 +6,7 @@ import '../../app.scss'
 
 const TaskList = ({ todos, sort, filter, search, handleOpenModalDelete, handleOpenModalEdit, completeTask }) => {
     return (
-        <>
+        <section>
             <table>
                 <thead >
                     <tr className="title-header">
@@ -33,9 +33,11 @@ const TaskList = ({ todos, sort, filter, search, handleOpenModalDelete, handleOp
 
                     // ordernar por ascendente ou decendente na ordem alfabetica
                     .sort((a, b) =>
-                        sort === "Asc"
-                            ? a.text.localeCompare(b.text)
-                            : b.text.localeCompare(a.text)
+                        sort === "None"
+                            ? true
+                            : sort === "Asc"
+                                ? a.text.localeCompare(b.text)
+                                : b.text.localeCompare(a.text)
                     )
 
                     .map((task) => (
@@ -52,7 +54,7 @@ const TaskList = ({ todos, sort, filter, search, handleOpenModalDelete, handleOp
                     ))}
 
             </table>
-        </>
+        </section>
     )
 }
 

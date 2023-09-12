@@ -1,10 +1,11 @@
+import './filters.scss'
 
-const Filter = ({ filter, setFilter, setSort }) => {
+const Filter = ({ filter, setFilter, sort, setSort }) => {
     return (
         <div className="filter">
             <h2>Filtrar:</h2>
             <div className="filter-options">
-                <div>
+                <div className='options'>
                     <p>status:</p>
                     <select value={filter} onChange={(e) => setFilter(e.target.value)} >
                         <option value="All">Todas</option>
@@ -12,10 +13,14 @@ const Filter = ({ filter, setFilter, setSort }) => {
                         <option value="Incomplete">Incompletas</option>
                     </select>
                 </div>
-                <div>
-                    <p>Ordem alfabética:</p>
-                    <button onClick={() => setSort("Asc")}>Asc</button>
-                    <button onClick={() => setSort("Desc")}>Desc</button>
+                <div className='options'>
+                    <p>Ordenar:</p>
+                    <select value={sort} onChange={(e) => setSort(e.target.value)} >
+                        <option value="None">None</option>
+                        <option value="Asc">Asc</option>
+                        <option value="Desc">Desc</option>
+                    </select>
+
                 </div>
             </div>
         </div>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import ModalAlert from "./components/ModalAlert/ModalAlert";
-import Filter from "./components/Filter/Filter";
+import Filter from "./components/Filter";
 import TaskList from "./components/TaskList/TaskList";
-import Search from "./components/Search/Search";
+import Search from "./components/Search";
 import "./app.scss"
 
 
@@ -26,7 +26,7 @@ function App() {
   // filtrar
   const [filter, setFilter] = useState("All");
   // ordernar
-  const [sort, setSort] = useState("Asc");
+  const [sort, setSort] = useState("None");
 
   function handleInputChange(e) {
     setTodo(e.target.value);
@@ -107,26 +107,24 @@ function App() {
   return (
     <section className="App" >
       <Header />
-      <h1>Otimize seu tempo e se organize com o nosso Planejador Diário.</h1>
+      <h1>Otimize seu tempo <br /> se organize com o nosso Planejador Diário.</h1>
 
-      <Filter filter={filter} setFilter={setFilter} setSort={setSort} />
-      <Search search={search} setSearch={setSearch} />
+      <div className="search-filter">
+        <Search search={search} setSearch={setSearch} />
+        <Filter filter={filter} setFilter={setFilter} sort={sort} setSort={setSort} />
+      </div>
 
       <ModalAlert
         isOpen={openModalEdit}
         setOpenModal={setOpenModalEdit}
-
         operation={"Deseja editar esta tarefa?"}
-        // title={task.text}
         onClickYes={handleEdit}
       />
 
       <ModalAlert
         isOpen={openModalDelete}
         setOpenModal={setOpenModalDelete}
-
         operation={"Deseja excluir esta tarefa?"}
-        // title={task.text}
         onClickYes={handleDeleteClick}
       />
 
