@@ -1,5 +1,11 @@
-	## Nova versão da lista de tarefa com novas funcionalidades como ordenação por ordem alfabética ascendente e decrescente, filtrar por título ou pelas as completadas ou incompletas. assim trazendo melhor usabilidade para o usuário para listar e organizar como desejar e buscar por alguma tarefa especifica.
+# Lista de Tarefas
+ Nova versão da lista de tarefa com novas funcionalidades como ordenação por ordem alfabética ascendente e decrescente, filtrar por título ou pelas as completadas ou incompletas. assim trazendo melhor usabilidade para o usuário para listar e organizar como desejar e buscar por alguma tarefa especifica.
+
+## 🔨 Funcionalidades do projeto
+### lista, ordena, filtra e busca as tarefas 
+ 
 ![](public/lista-tarefas.gif)
+
 <div align="center">
 	<h1>Listagem de tarefas</h1>
 	<br>
