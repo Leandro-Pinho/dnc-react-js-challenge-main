@@ -103,8 +103,10 @@
         width: 685px;
         display: flex;
         justify-content: space-between;
+        position: relative;
 
         input {
+            width: 100%;
             border: none;
             background-color: transparent;
             outline: none;
@@ -112,6 +114,7 @@
             font-size: 25px;
             font-family: Raleway;
             font-style: italic;
+            z-index: 2;
         }
 
         input:focus {
@@ -119,6 +122,8 @@
         }
 
         button {
+            position: absolute;
+            right: 10px;
             background: transparent;
             border: none;
             font-size: 30px;
