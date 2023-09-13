@@ -8,6 +8,7 @@
 
 <div align="center">
 	<h1>Listagem de tarefas</h1>
+	<p>versão anterior</p>
 	<br>
 	<img src="./public/home-preview.png">
 	<br>
